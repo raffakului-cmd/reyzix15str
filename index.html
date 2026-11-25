@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selamat Hari Guru - Hamka 1</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at 50% 0%, #172554 0%, #0f172a 55%, #020617 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 25px 18px;
+            color: #f8fafc;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Dekorasi Cahaya Latar */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        header {
+            width: 100%;
+            max-width: 620px;
+            text-align: center;
+            padding: 18px 20px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(251, 191, 36, 0.35);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(56, 189, 248, 0.08);
+            margin-bottom: 24px;
+            position: relative;
+            z-index: 2;
+            animation: slideDown 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .badge-top {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fbbf24;
+            background: rgba(251, 191, 36, 0.12);
+            border: 1px solid rgba(251, 191, 36, 0.3);
+            padding: 4px 12px;
+            border-radius: 99px;
+            margin-bottom: 6px;
+        }
+
+        header h1 {
+            font-size: 2.1rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffffff, #7dd3fc, #fbbf24, #ffffff);
+            background-size: 250% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            animation: shineText 5s linear infinite;
+        }
+
+        #music-toggle {
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: rgba(30, 58, 138, 0.6);
+            border: 1px solid rgba(125, 211, 252, 0.4);
+            color: #7dd3fc;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        #music-toggle:hover {
+            background: rgba(56, 189, 248, 0.25);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 620px;
+            background: linear-gradient(180deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.9) 100%);
+            backdrop-filter: blur(18px);
+            border: 1px solid rgba(125, 211, 252, 0.2);
+            padding: 36px 28px;
+            border-radius: 26px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.65);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeScaleUp 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .card-icon {
+            font-size: 2.6rem;
+            margin-bottom: 14px;
+            display: inline-block;
+            animation: floatIcon 3s ease-in-out infinite;
+        }
+
+        .intro-card {
+            background: rgba(15, 23, 42, 0.65);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 18px;
+            padding: 22px 20px;
+            margin-bottom: 28px;
+            position: relative;
+        }
+
+        .intro-text {
+            font-size: 1.06rem;
+            line-height: 1.75;
+            color: #e2e8f0;
+            font-style: italic;
+        }
+
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(251, 191, 36, 0.45), transparent);
+            margin: 22px 0;
+        }
+
+        .sub-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 18px;
+            color: #fbbf24;
+            letter-spacing: 0.8px;
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 480px) {
+            .btn-group { grid-template-columns: 1fr; }
+        }
+
+        .teacher-btn {
+            padding: 18px 20px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            cursor: pointer;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            z-index: 5;
+        }
+
+        .teacher-btn span.role {
+            font-size: 0.78rem;
+            font-weight: 500;
+            opacity: 0.85;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-ustad {
+            background: linear-gradient(135deg, #1d4ed8 0%, #0284c7 100%);
+            box-shadow: 0 8px 22px rgba(2, 132, 199, 0.35);
+        }
+
+        .btn-ustad:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 30px rgba(56, 189, 248, 0.55);
+            border-color: #7dd3fc;
+        }
+
+        .btn-ustadzah {
+            background: linear-gradient(135deg, #312e81 0%, #4f46e5 100%);
+            box-shadow: 0 8px 22px rgba(79, 70, 229, 0.35);
+        }
+
+        .btn-ustadzah:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 30px rgba(129, 140, 248, 0.55);
+            border-color: #a5b4fc;
+        }
+
+        .btn-back {
+            background: linear-gradient(135deg, #0ea5e9, #10b981);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 14px;
+            cursor: pointer;
+            margin-top: 26px;
+            box-shadow: 0 8px 22px rgba(16, 185, 129, 0.35);
+            transition: all 0.3s ease;
+            animation: fadeScaleUp 0.5s ease;
+        }
+
+        .btn-back:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 26px rgba(16, 185, 129, 0.55);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .typing-box {
+            font-size: 1.15rem;
+            line-height: 1.75;
+            min-height: 125px;
+            margin-bottom: 20px;
+            color: #f1f5f9;
+            font-weight: 500;
+            background: rgba(15, 23, 42, 0.55);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .typing-cursor::after {
+            content: '|';
+            color: #fbbf24;
+            animation: blink 0.8s infinite;
+        }
+
+        .game-area {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeScaleUp 0.6s ease;
+        }
+
+        .status-text {
+            font-weight: 600;
+            color: #fbbf24;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .cups-wrapper {
+            position: relative;
+            width: 300px;
+            height: 170px;
+            margin: 10px auto;
+        }
+
+        .cup-slot {
+            position: absolute;
+            top: 20px;
+            width: 110px;
+            height: 140px;
+            transition: left 0.38s cubic-bezier(0.68, -0.35, 0.265, 1.35);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            cursor: default;
+        }
+
+        .cup-slot.clickable {
+            cursor: pointer;
+            animation: pulseGlow 1.8s infinite ease-in-out;
+        }
+
+        .cup-slot.clickable:hover .cup {
+            transform: translateY(-12px) scale(1.06);
+            box-shadow: 0 15px 30px rgba(251, 191, 36, 0.45);
+            border-color: #fbbf24;
+        }
+
+        .paper {
+            background: linear-gradient(135deg, #fef08a, #fde047);
+            border: 2px dashed #ca8a04;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            color: #1e293b;
+            margin-bottom: 12px;
+            transition: all 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 1;
+            box-shadow: 0 4px 12px rgba(250, 204, 21, 0.35);
+        }
+
+        .paper.inside {
+            transform: translateY(55px) scale(0.4) rotate(15deg);
+            opacity: 0;
+        }
+
+        .cup {
+            width: 92px;
+            height: 108px;
+            background: linear-gradient(145deg, rgba(56, 189, 248, 0.35), rgba(30, 58, 138, 0.7));
+            backdrop-filter: blur(6px);
+            border: 2px solid #38bdf8;
+            border-top: 5px solid #7dd3fc;
+            border-radius: 8px 8px 18px 18px;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #e0f2fe;
+            font-weight: bold;
+            font-size: 1.6rem;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+            transition: all 0.45s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        .cup.opaque {
+            background: linear-gradient(145deg, #0f172a, #1e3a8a);
+            border-color: #fbbf24;
+            box-shadow: 0 0 22px rgba(251, 191, 36, 0.35);
+        }
+
+        .result-box {
+            margin-top: 22px;
+            padding: 20px;
+            background: rgba(15, 23, 42, 0.85);
+            border-radius: 16px;
+            border-left: 5px solid #fbbf24;
+            border-right: 1px solid rgba(251, 191, 36, 0.25);
+            border-top: 1px solid rgba(251, 191, 36, 0.25);
+            border-bottom: 1px solid rgba(251, 191, 36, 0.25);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            font-weight: 600;
+            color: #f8fafc;
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeScaleUp {
+            from { opacity: 0; transform: scale(0.94) translateY(15px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+        @keyframes shineText {
+            to { background-position: 250% center; }
+        }
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        @keyframes pulseGlow {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="badge-top">✨ Happy Teacher's Day ✨</div>
+        <h1>Hamka 1</h1>
+        <button id="music-toggle" onclick="toggleMusic()" title="Musik Latar">🔇</button>
+    </header>
+
+    <!-- Halaman Utama -->
+    <div id="main-page" class="container">
+        <div class="card-icon">🎓</div>
+        <div class="intro-card">
+            <p class="intro-text">
+                "Selamat Hari Guru! Terima kasih kepada Ustadz dan Ustazah atas ilmu dan kesabarannya dalam mengajar kami. Semoga selalu sehat dan bahagia. Kami juga berharap semoga kelas kita ke depannya lebih asik, seru, dan menyenangkan agar belajar jadi lebih semangat dan tidak membosankan."
+            </p>
+        </div>
+
+        <div class="divider"></div>
+        <div class="sub-title">Ustad / Ustadzah</div>
+
+        <div class="btn-group">
+            <button type="button" class="teacher-btn btn-ustad" onclick="startTeacherPage('Ustad Dede')">
+                <span class="role">Pilih Guru</span>
+                <span>👨‍🏫 Ustad Dede</span>
+            </button>
+            <button type="button" class="teacher-btn btn-ustadzah" onclick="startTeacherPage('Ustadzah Risna')">
+                <span class="role">Pilih Guru</span>
+                <span>👩‍🏫 Ustadzah Risna</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Halaman Ucapan & Game Tebak Gelas -->
+    <div id="teacher-page" class="container hidden">
+        <div id="typing-text" class="typing-box typing-cursor"></div>
+
+        <div id="game-area" class="game-area hidden">
+            <div id="status-text" class="status-text">Kertas sedang dimasukkan ke dalam gelas...</div>
+
+            <div class="cups-wrapper">
+                <div id="slot-0" class="cup-slot" style="left: 20px;" onclick="selectCup(0)">
+                    <div id="paper-0" class="paper">Senang</div>
+                    <div id="cup-0" class="cup">🥤</div>
+                </div>
+
+                <div id="slot-1" class="cup-slot" style="left: 170px;" onclick="selectCup(1)">
+                    <div id="paper-1" class="paper">Biasa saja</div>
+                    <div id="cup-1" class="cup">🥤</div>
+                </div>
+            </div>
+
+            <div id="result-box" class="result-box hidden"></div>
+
+            <button type="button" id="btn-back" class="btn-back hidden" onclick="goHome()">Kembali ke halaman utama</button>
+        </div>
+    </div>
+
+    <script>
+        let typingInterval;
+        let shuffleInterval;
+        let canPick = false;
+        const posKiri = 20;
+        const posKanan = 170;
+        let posisiSlot0 = posKiri;
+        let posisiSlot1 = posKanan;
+
+        let audioCtx = null;
+        let isMusicPlaying = false;
+        let musicTimeout = null;
+
+        const hymneGuruNotes = new Array(
+            { f: 261.63, d: 0.5 }, { f: 329.63, d: 0.5 }, { f: 392.00, d: 1.0 },
+            { f: 440.00, d: 0.5 }, { f: 392.00, d: 0.5 }, { f: 329.63, d: 1.0 },
+            { f: 293.66, d: 0.5 }, { f: 329.63, d: 0.5 }, { f: 349.23, d: 0.5 }, { f: 293.66, d: 0.5 },
+            { f: 261.63, d: 1.5 }, { f: 0, d: 0.5 },
+            { f: 329.63, d: 0.5 }, { f: 392.00, d: 0.5 }, { f: 523.25, d: 1.0 },
+            { f: 493.88, d: 0.5 }, { f: 440.00, d: 0.5 }, { f: 392.00, d: 1.0 },
+            { f: 440.00, d: 0.5 }, { f: 392.00, d: 0.5 }, { f: 349.23, d: 0.5 }, { f: 329.63, d: 0.5 },
+            { f: 293.66, d: 1.5 }, { f: 0, d: 0.5 }
+        );
+
+        function playMelodyLoop(index) {
+            if (!isMusicPlaying) return;
+            const note = hymneGuruNotes.at(index);
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+
+                if (note.f > 0) {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(note.f, audioCtx.currentTime);
+
+                    gain.gain.setValueAtTime(0.001, audioCtx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.05, audioCtx.currentTime + 0.08);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + note.d);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start();
+                    osc.stop(audioCtx.currentTime + note.d);
+                }
+            } catch (e) {}
+
+            const nextIndex = (index + 1) % hymneGuruNotes.length;
+            musicTimeout = setTimeout(function() { playMelodyLoop(nextIndex); }, note.d * 1000);
+        }
+
+        function startMusic() {
+            if (!isMusicPlaying) {
+                isMusicPlaying = true;
+                document.getElementById('music-toggle').innerText = '🔊';
+                playMelodyLoop(0);
+            }
+        }
+
+        function toggleMusic() {
+            const btn = document.getElementById('music-toggle');
+            if (isMusicPlaying) {
+                isMusicPlaying = false;
+                clearTimeout(musicTimeout);
+                btn.innerText = '🔇';
+            } else {
+                startMusic();
+            }
+        }
+
+        function startTeacherPage(teacherName) {
+            startMusic();
+
+            document.getElementById('main-page').classList.add('hidden');
+            document.getElementById('teacher-page').classList.remove('hidden');
+
+            resetGame();
+
+            const fullText = 'Terima kasih ' + teacherName + ', Atas ajaran dan ilmu yang diberikan kepada kami. seluruh anak hamka 1. Bagaimana perasaan ustadz dan ustazah dalam membimbing kami?';
+            
+            typeWriter(fullText, function() {
+                document.getElementById('game-area').classList.remove('hidden');
+                startCupSequence();
+            });
+        }
+
+        function typeWriter(text, callback) {
+            const typingElement = document.getElementById('typing-text');
+            typingElement.innerHTML = '';
+            typingElement.classList.add('typing-cursor');
+            let i = 0;
+
+            clearInterval(typingInterval);
+            typingInterval = setInterval(function() {
+                if (i < text.length) {
+                    typingElement.innerHTML += text.charAt(i);
+                    i++;
+                } else {
+                    clearInterval(typingInterval);
+                    typingElement.classList.remove('typing-cursor');
+                    if (callback) setTimeout(callback, 600);
+                }
+            }, 38);
+        }
+
+        function resetGame() {
+            clearInterval(shuffleInterval);
+            canPick = false;
+            posisiSlot0 = posKiri;
+            posisiSlot1 = posKanan;
+
+            document.getElementById('game-area').classList.add('hidden');
+            document.getElementById('result-box').classList.add('hidden');
+            document.getElementById('btn-back').classList.add('hidden');
+            document.getElementById('status-text').innerText = 'Kertas sedang dimasukkan ke dalam gelas...';
+
+            document.getElementById('slot-0').style.left = posisiSlot0 + 'px';
+            document.getElementById('slot-1').style.left = posisiSlot1 + 'px';
+
+            for (let i = 0; i < 2; i++) {
+                const slot = document.getElementById('slot-' + i);
+                const paper = document.getElementById('paper-' + i);
+                const cup = document.getElementById('cup-' + i);
+
+                slot.classList.remove('clickable');
+                paper.classList.remove('inside');
+                cup.classList.remove('opaque');
+                cup.innerText = '🥤';
+            }
+        }
+
+        function startCupSequence() {
+            const statusText = document.getElementById('status-text');
+
+            setTimeout(function() {
+                document.getElementById('paper-0').classList.add('inside');
+                document.getElementById('paper-1').classList.add('inside');
+
+                setTimeout(function() {
+                    document.getElementById('cup-0').classList.add('opaque');
+                    document.getElementById('cup-1').classList.add('opaque');
+                    document.getElementById('cup-0').innerText = '❓';
+                    document.getElementById('cup-1').innerText = '❓';
+                    statusText.innerText = 'Gelas sedang diputar selama 5 detik...';
+
+                    let elapsed = 0;
+                    const stepTime = 420;
+                    const totalDuration = 5000;
+
+                    if (Math.random() > 0.5) {
+                        swapCups();
+                    }
+
+                    shuffleInterval = setInterval(function() {
+                        elapsed += stepTime;
+                        swapCups();
+
+                        if (elapsed >= totalDuration) {
+                            clearInterval(shuffleInterval);
+                            enableSelection();
+                        }
+                    }, stepTime);
+
+                }, 700);
+            }, 1500);
+        }
+
+        function swapCups() {
+            const temp = posisiSlot0;
+            posisiSlot0 = posisiSlot1;
+            posisiSlot1 = temp;
+
+            document.getElementById('slot-0').style.left = posisiSlot0 + 'px';
+            document.getElementById('slot-1').style.left = posisiSlot1 + 'px';
+        }
+
+        function enableSelection() {
+            canPick = true;
+            document.getElementById('status-text').innerText = 'Silakan tebak dan pilih salah satu gelas di bawah ini!';
+            document.getElementById('slot-0').classList.add('clickable');
+            document.getElementById('slot-1').classList.add('clickable');
+        }
+
+        function selectCup(slotIndex) {
+            if (!canPick) return;
+            canPick = false;
+
+            document.getElementById('slot-0').classList.remove('clickable');
+            document.getElementById('slot-1').classList.remove('clickable');
+            document.getElementById('status-text').innerText = 'Hasil Tebakan:';
+
+            document.getElementById('cup-0').classList.remove('opaque');
+            document.getElementById('cup-1').classList.remove('opaque');
+            document.getElementById('cup-0').innerText = '🥤';
+            document.getElementById('cup-1').innerText = '🥤';
+
+            document.getElementById('paper-0').classList.remove('inside');
+            document.getElementById('paper-1').classList.remove('inside');
+
+            const resultBox = document.getElementById('result-box');
+            resultBox.classList.remove('hidden');
+
+            if (slotIndex === 0) {
+                resultBox.innerText = 'Haha! Pilihan tepat! Terima kasih atas bimbingan nya ustadz / ustadzah, Semoga sehat selalu dan mudah mudahan banyak hal baru dan seru kedepan nya di dalam kelas hamka 1🙏🏻';
+            } else {
+                resultBox.innerText = '🏻Haha! Seperti nya tebakan nya salah, Jika kami dari hamka 1 ada salah dengan ustad/zah maka kami minta maaf sebesar besar nya.';
+            }
+
+            document.getElementById('btn-back').classList.remove('hidden');
+        }
+
+        function goHome() {
+            clearInterval(typingInterval);
+            clearInterval(shuffleInterval);
+            document.getElementById('teacher-page').classList.add('hidden');
+            document.getElementById('main-page').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
